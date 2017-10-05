@@ -1,0 +1,20 @@
+### configuration file
+
+server:
+  port: 8090
+
+security:
+  basic:
+    enabled: false
+
+info:
+  build:
+    artifact: ${project.artifactId}
+    name: ${project.name}
+    description: ${project.description}
+    version: ${project.version}
+
+
+logging:
+  file: email-sender.log
+  level: info
