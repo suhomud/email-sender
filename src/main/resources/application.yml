@@ -1,7 +1,9 @@
 ### configuration file
 
+
 server:
   port: 8090
+  contextPath: /email-sender
 
 security:
   basic:
