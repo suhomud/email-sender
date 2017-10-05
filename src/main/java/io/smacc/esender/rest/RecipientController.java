@@ -21,7 +21,7 @@ public class RecipientController {
 		this.recipientService = recipientService;
 	}
 
-	@RequestMapping(value = "",
+	@RequestMapping(
 			method = RequestMethod.GET,
 			produces = {"application/json"})
 	@ResponseStatus(HttpStatus.OK)
@@ -30,7 +30,7 @@ public class RecipientController {
 		return recipientService.getAll();
 	}
 
-	@RequestMapping(value = "",
+	@RequestMapping(
 			method = RequestMethod.POST,
 			produces = {"application/json"})
 	@ResponseStatus(HttpStatus.OK)
