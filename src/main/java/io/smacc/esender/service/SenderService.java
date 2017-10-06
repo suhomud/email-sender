@@ -1,5 +1,6 @@
 package io.smacc.esender.service;
 
+import io.smacc.esender.domain.Message;
 import io.smacc.esender.domain.Recipient;
 import io.smacc.esender.repository.SenderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,9 @@ public class SenderService {
 		this.senderRepository = senderRepository;
 	}
 
-	public void send(String text) {
+	public void send(Message message) {
 		List<Recipient> recipients = recipientService.getAll();
-		senderRepository.sendToAll(recipients, text);
+		senderRepository.sendToAll(recipients, message);
 	}
 
 }

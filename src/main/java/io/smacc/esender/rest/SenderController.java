@@ -1,5 +1,6 @@
 package io.smacc.esender.rest;
 
+import io.smacc.esender.domain.Message;
 import io.smacc.esender.service.SenderService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,8 @@ public class SenderController {
 			produces = {"application/json"})
 	@ResponseStatus(HttpStatus.OK)
 	@ResponseBody
-	public void send(@RequestBody String text) {
-		senderService.send(text);
+	public void send(@RequestBody Message message) throws Exception {
+		senderService.send(message);
 	}
 
 }
