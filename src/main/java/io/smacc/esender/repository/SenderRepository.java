@@ -2,6 +2,7 @@ package io.smacc.esender.repository;
 
 import io.smacc.esender.domain.Message;
 import io.smacc.esender.domain.Recipient;
+import io.smacc.esender.exception.NoRecipientsException;
 import io.smacc.esender.exception.NoWorkedProvidersException;
 import io.smacc.esender.provider.EmailProvider;
 import org.slf4j.Logger;
@@ -24,13 +25,16 @@ public class SenderRepository {
 	}
 
 	public void sendToAll(List<Recipient> recipients, Message message) {
+		if (recipients.isEmpty()) {
+			throw new NoRecipientsException();
+		}
 		boolean finished = false;
 		for (EmailProvider provider : emailProviders) {
 			try {
 				provider.trySend(recipients, message);
 				finished = true;
 			} catch (Exception e) {
-				log.error("Sending has failed with provider={}", provider.toString());
+				log.error("Sending has failed with provider={}. error message={}", provider.toString(), e.getMessage());
 			}
 		}
 		if (!finished) {

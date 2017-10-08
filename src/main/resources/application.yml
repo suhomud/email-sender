@@ -1,5 +1,4 @@
-### configuration file
-
+### application property
 
 server:
   port: 8090
@@ -20,3 +19,12 @@ info:
 logging:
   file: email-sender.log
   level: info
+
+### user property
+email.sender.user:
+  from:
+
+
+### provider property
+email.sender.provider:
+  sendgridApiKey:
