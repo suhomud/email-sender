@@ -33,7 +33,7 @@ public class RecipientController {
 	@RequestMapping(
 			method = RequestMethod.POST,
 			produces = {"application/json"})
-	@ResponseStatus(HttpStatus.OK)
+	@ResponseStatus(HttpStatus.CREATED)
 	@ResponseBody
 	public void add(@RequestBody List<Recipient> recipients) {
 		recipientService.addAll(recipients);
