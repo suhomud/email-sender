@@ -21,4 +21,8 @@ public class RecipientRepository {
 		recipients.addAll(emails);
 	}
 
+	public void clear() {
+		recipients.clear();
+	}
+
 }

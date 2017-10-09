@@ -33,6 +33,7 @@ public class SenderRepository {
 			try {
 				provider.trySend(recipients, message);
 				finished = true;
+				break;
 			} catch (Exception e) {
 				log.error("Sending has failed with provider={}. error message={}", provider.toString(), e.getMessage());
 			}
@@ -40,7 +41,6 @@ public class SenderRepository {
 		if (!finished) {
 			reportError();
 		}
-
 	}
 
 	private void reportError() {

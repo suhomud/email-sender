@@ -39,4 +39,13 @@ public class RecipientController {
 		recipientService.addAll(recipients);
 	}
 
+	@RequestMapping(
+			method = RequestMethod.DELETE,
+			produces = {"application/json"})
+	@ResponseStatus(HttpStatus.CREATED)
+	@ResponseBody
+	public void clear() {
+		recipientService.clear();
+	}
+
 }
