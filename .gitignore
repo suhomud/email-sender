@@ -2,6 +2,7 @@
 ### Java template
 # Compiled class file
 *.class
+application-local.yml
 
 # Log file
 *.log

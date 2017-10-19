@@ -28,7 +28,7 @@ public class SendgridProvider implements EmailProvider {
 
 	@Autowired
 	public SendgridProvider(UserProperties up, ProviderProperties pp) {
-		Assert.hasLength(up.getUserFrom(), "set up userFrom property");
+		Assert.hasLength(up.getFrom(), "set up from property");
 		Assert.hasLength(pp.getSendgridApiKey(), "set up sendgridApiKey property");
 		this.userProperties = up;
 		this.providerProperties = pp;
@@ -37,10 +37,10 @@ public class SendgridProvider implements EmailProvider {
 	@Override
 	public void trySend(List<Recipient> recipients, Message message) throws Exception {
 		log.debug("trying to send message from={} to recipients={} by provider={}",
-				userProperties.getUserFrom(),
+				userProperties.getFrom(),
 				Arrays.toString(recipients.toArray()),
 				PROVIDER_NAME);
-		Email from = new Email(userProperties.getUserFrom());
+		Email from = new Email(userProperties.getFrom());
 		String subject = message.getSubject();
 		Content content = new Content(CONTENT_TYPE, message.getText());
 
