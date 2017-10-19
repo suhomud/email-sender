@@ -9,6 +9,9 @@ public class ProviderProperties {
 
 	/**
 	 *  https://app.sendgrid.com api key
+	 *
+	 *  email.sender.provider.sendgridApiKey property
+	 *
 	 */
 	private String sendgridApiKey;
 

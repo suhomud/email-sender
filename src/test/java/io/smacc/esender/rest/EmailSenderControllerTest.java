@@ -3,7 +3,9 @@ package io.smacc.esender.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.smacc.esender.Application;
+import io.smacc.esender.domain.Message;
 import io.smacc.esender.domain.Recipient;
+import io.smacc.esender.provider.SendgridProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -22,12 +25,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = Application.class)
+@SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
 public class EmailSenderControllerTest {
 
@@ -35,6 +40,9 @@ public class EmailSenderControllerTest {
 	RecipientController recipientController;
 	@InjectMocks
 	SenderController senderController;
+
+	@MockBean
+	SendgridProvider mockProvider;
 
 	@Autowired
 	WebApplicationContext context;
@@ -46,7 +54,6 @@ public class EmailSenderControllerTest {
 		MockitoAnnotations.initMocks(this);
 		mvc = MockMvcBuilders.webAppContextSetup(context).build();
 	}
-
 
 	@Test
 	public void shouldReturnEmptyRecipientsList() throws Exception {
@@ -78,7 +85,29 @@ public class EmailSenderControllerTest {
 	}
 
 	@Test
-	public void shouldReturnBadRequestWhenThereAreNoRecipients() throws Exception {
+	public void shouldTryToSendEmailToRecipients() throws Exception {
+		// GIVEN
+		List<Recipient> recipients = new ArrayList<>(generateRecipients(1));
+		Message message = new Message("test subject", "test text");
+		byte[] recipientsJson = toJson(recipients);
+		byte[] messageJson = toJson(message);
+		// ADD
+		mvc.perform(post("/recipient")
+				.content(recipientsJson)
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isCreated());
+
+		// SEND
+		mvc.perform(post("/sender")
+				.content(messageJson)
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
+		// VERIFY
+		verify(mockProvider, times(1)).trySend(recipients, message);
+	}
+
+	@Test
+	public void shouldReturnBadRequestWhenSendWithoutRecipients() throws Exception {
 		// GIVEN
 		mvc.perform(delete("/recipient"));
 

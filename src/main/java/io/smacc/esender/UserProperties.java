@@ -4,20 +4,22 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationProperties("email.sender.user")
+@ConfigurationProperties("email.sender")
 public class UserProperties {
 
 	/**
 	 *  Sender email address
+	 *
+	 *  email.sender.user.from property
 	 */
-	private String from;
+	private String userFrom;
 
-	public String getFrom() {
-		return from;
+	public String getUserFrom() {
+		return userFrom;
 	}
 
-	public void setFrom(String from) {
-		this.from = from;
+	public void setUserFrom(String userFrom) {
+		this.userFrom = userFrom;
 	}
 
 }
