@@ -1,13 +1,12 @@
 package io.smacc.esender.rest;
 
 import io.smacc.esender.domain.Recipient;
+import io.smacc.esender.domain.RecipientWeb;
 import io.smacc.esender.service.RecipientService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/recipient")
@@ -25,25 +24,22 @@ public class RecipientController {
 			method = RequestMethod.GET,
 			produces = {"application/json"})
 	@ResponseStatus(HttpStatus.OK)
-	@ResponseBody
-	public List<Recipient> getAll() {
-		return recipientService.getAll();
+	public RecipientWeb getAll() {
+		return new RecipientWeb(recipientService.getAll());
 	}
 
 	@RequestMapping(
 			method = RequestMethod.POST,
 			produces = {"application/json"})
 	@ResponseStatus(HttpStatus.CREATED)
-	@ResponseBody
-	public void add(@RequestBody List<Recipient> recipients) {
-		recipientService.addAll(recipients);
+	public void add(@RequestBody Recipient recipient) {
+		recipientService.add(recipient);
 	}
 
 	@RequestMapping(
 			method = RequestMethod.DELETE,
 			produces = {"application/json"})
 	@ResponseStatus(HttpStatus.CREATED)
-	@ResponseBody
 	public void clear() {
 		recipientService.clear();
 	}

@@ -23,7 +23,6 @@ public class SenderController {
 			method = RequestMethod.POST,
 			produces = {"application/json"})
 	@ResponseStatus(HttpStatus.OK)
-	@ResponseBody
 	public void send(@RequestBody Message message) throws Exception {
 		senderService.send(message);
 	}

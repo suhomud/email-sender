@@ -17,12 +17,11 @@ public class RecipientRepository {
 		return new ArrayList<>(recipients);
 	}
 
-	public void addAll(List<Recipient> emails) {
-		recipients.addAll(emails);
-	}
-
 	public void clear() {
 		recipients.clear();
 	}
 
+	public void add(Recipient recipient) {
+		recipients.add(recipient);
+	}
 }

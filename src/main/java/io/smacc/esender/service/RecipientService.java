@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 @Service
 public class RecipientService {
 
@@ -21,11 +22,13 @@ public class RecipientService {
 		return recipientRepository.getAll();
 	}
 
-	public void addAll(List<Recipient> emails) {
-		recipientRepository.addAll(emails);
-	}
 
 	public void clear() {
 		recipientRepository.clear();
 	}
+
+	public void add(Recipient recipient) {
+		recipientRepository.add(recipient);
+	}
+
 }
