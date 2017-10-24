@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.core.Is.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -73,7 +74,7 @@ public class EmailSenderControllerTest {
 		mvc.perform(get("/recipient"))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.recipients", hasSize(1)))
-				.andExpect(jsonPath("$.recipients[0].email").value(email));
+				.andExpect(jsonPath("$.recipients[0].email", is(recipient.getEmail())));
 	}
 
 	@Test
