@@ -10,7 +10,6 @@ import io.smacc.esender.provider.SendgridProvider;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,20 +31,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 public class EmailSenderControllerTest {
 
-	@InjectMocks
-	RecipientController recipientController;
-	@InjectMocks
-	SenderController senderController;
+	private static Gson GSON = new GsonBuilder().create();
 
 	@MockBean
-	SendgridProvider mockProvider;
-
+	private SendgridProvider mockProvider;
 	@Autowired
-	WebApplicationContext context;
-
+	private WebApplicationContext context;
 	private MockMvc mvc;
-
-	private static Gson GSON = new GsonBuilder().create();
 
 
 	@Before
