@@ -1,5 +1,7 @@
 package io.smacc.esender;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -12,6 +14,8 @@ public class UserProperties {
 	 *
 	 *  email.sender.user.from property
 	 */
+	@NotBlank
+	@Email
 	private String from;
 
 	public String getFrom() {

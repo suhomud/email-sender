@@ -1,5 +1,6 @@
 package io.smacc.esender;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -13,6 +14,7 @@ public class ProviderProperties {
 	 *  email.sender.provider.sendgridApiKey property
 	 *
 	 */
+	@NotBlank
 	private String sendgridApiKey;
 
 	public String getSendgridApiKey() {

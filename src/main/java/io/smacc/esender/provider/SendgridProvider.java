@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,8 +27,6 @@ public class SendgridProvider implements EmailProvider {
 
 	@Autowired
 	public SendgridProvider(UserProperties up, ProviderProperties pp) {
-		Assert.hasLength(up.getFrom(), "set up from property");
-		Assert.hasLength(pp.getSendgridApiKey(), "set up sendgridApiKey property");
 		this.userProperties = up;
 		this.providerProperties = pp;
 	}
