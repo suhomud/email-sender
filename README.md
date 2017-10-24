@@ -23,4 +23,13 @@ This application is packaged as a war which has Tomcat 8 embedded.
  
 Default port is ```8090```(customize it in application.yml). 
   Please, use ```http://localhost:8090/email-sender/swagger-ui.html``` to have a look at API with UI
-
+  
+  
+  
+  ## Useful links
+  
+* Test
+  * [JsonPath](https://github.com/json-path/JsonPath) uses for checking the response for integration tests
+  * [Integration Testing in Spring](http://www.baeldung.com/integration-testing-in-spring) examples how to implement integration tests
+* Properties 
+  * [configuration properties with validation](http://www.baeldung.com/configuration-properties-in-spring-boot)
