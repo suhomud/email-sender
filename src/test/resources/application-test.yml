@@ -1,0 +1,8 @@
+### user property
+email.sender.user:
+  from:
+
+
+### provider property
+email.sender.provider:
+  sendgridApiKey:

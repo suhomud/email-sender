@@ -49,9 +49,10 @@ public class EmailSenderControllerTest {
 
 
 	@Before
-	public void initTests() {
+	public void initTests() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		mvc = MockMvcBuilders.webAppContextSetup(context).build();
+		mvc.perform(delete("/recipient"));
 	}
 
 	@Test
@@ -64,7 +65,7 @@ public class EmailSenderControllerTest {
 
 	@Test
 	public void shouldAddRecipientsAndReturnIt() throws Exception {
-		// Before
+		// BEFORE
 		String email = "test@email.com";
 		Recipient recipient = new Recipient(email);
 		String recipientJson = GSON.toJson(recipient);
@@ -85,7 +86,7 @@ public class EmailSenderControllerTest {
 
 	@Test
 	public void shouldTryToSendEmailToRecipients() throws Exception {
-		// INIT
+		// BEFORE
 		String email = "test@email.com";
 		Recipient recipient = new Recipient(email);
 		Message message = new Message("test subject", "test text");
@@ -107,8 +108,6 @@ public class EmailSenderControllerTest {
 
 	@Test
 	public void shouldReturnBadRequestWhenSendWithoutRecipients() throws Exception {
-		// GIVEN
-		mvc.perform(delete("/recipient"));
 
 		// SEND
 		mvc.perform(post("/sender"))
