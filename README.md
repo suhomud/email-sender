@@ -17,9 +17,10 @@ This application is packaged as a war which has Tomcat 8 embedded.
  
  * Clone repository
  * JDK 1.8 and maven 3.x 
- * You can run the project by running ``` mvn clean install```
- * Once you have successful build you can run application by:
- ```mvn spring-boot:run -Drun.arguments="spring.profiles.active=test"```
+ * You can build project by ``` mvn clean install``` will run integration test
+ * Once you have successful build you can run application by:<br/>
+ `mvn spring-boot:run` uses `application.property/yml`<br/>
+ `mvn spring-boot:run -Drun.profiles=local` uses `application-local.property/yml` (You should add local property in case of need)<br/>
  
 Default port is ```8090```(customize it in application.yml). 
   Please, use ```http://localhost:8090/email-sender/swagger-ui.html``` to have a look at API with UI
